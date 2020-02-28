@@ -10,7 +10,7 @@ namespace Sorting
         {
             List<ISort> sorts = new List<ISort>()
             {
-                new BubleSort(), new InsertionSort(), new QuickSort()
+                new BubleSort(), new InsertionSort(), new TreeSort(), new QuickSort()
             };
             Random random = new Random();             
             for (int i = 10; i <= 40; i = i * 2)
@@ -18,7 +18,7 @@ namespace Sorting
                 Console.WriteLine($"Количество элементов: {i}");
                 int[] array = new int[i]; 
                 for (int j = 0; j < array.Length; j++)
-                    array[j] = random.Next(-1000, 1000);
+                    array[j] = random.Next(-99, 99);
                 Console.WriteLine($"Оригинальный массив: \n{string.Join(' ', array)}");
                 int[] sortedArray = (int[])array.Clone();
                 Array.Sort(sortedArray);
