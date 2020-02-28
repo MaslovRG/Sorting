@@ -6,10 +6,10 @@ namespace Sorting
 {
     public class Swapper
     {
-        public static void Swap(long[] massive, int i, int j, ref long swaps)
+        public static void Swap<T>(T[] massive, int i, int j, ref int swaps)
         {
             swaps++;
-            long temp = massive[i];
+            T temp = massive[i];
             massive[i] = massive[j];
             massive[j] = temp;
         }

@@ -6,23 +6,28 @@ namespace Sorting
 {
     public class BubleSort : ISort
     {
-        public (long, long) Sort(long[] massive)
+        public (int, int) Sort<T>(T[] array) where T : IComparable<T>
         {
-            long compares = 0, swaps = 0; 
+            int compares = 0, swaps = 0; 
             bool f = false; 
-            for (int j = 0; j < massive.Length - 1 && !f; j++)
+            for (int j = 0; j < array.Length - 1 && !f; j++)
             {
                 f = false; 
-                for (int i = 0; i < massive.Length - j - 1; i++)
+                for (int i = 0; i < array.Length - j - 1; i++)
                 {
                     compares++; 
-                    if (massive[i] > massive[i + 1])
+                    if (array[i].CompareTo(array[i + 1]) > 0)
                     {
-                        Swapper.Swap(massive, i, i + 1, ref swaps); 
+                        Swapper.Swap(array, i, i + 1, ref swaps); 
                     }
                 }
             }
             return (compares, swaps); 
+        }
+        
+        public string GetSortName()
+        {
+            return "СОРТИРОВКА ПУЗЫРЬКОМ"; 
         }
     }
 }

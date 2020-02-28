@@ -6,6 +6,10 @@ namespace Sorting
 {
     public interface ISort
     {
-        (long, long) Sort(long[] massive); 
+        // returns 
+        // 1 - compares
+        // 2 - swaps 
+        (int, int) Sort<T>(T[] array) where T : IComparable<T>;
+        string GetSortName(); 
     }
 }
