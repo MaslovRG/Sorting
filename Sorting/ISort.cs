@@ -6,6 +6,6 @@ namespace Sorting
 {
     public interface ISort
     {
-        void Sort(long[] massive); 
+        (long, long) Sort(long[] massive); 
     }
 }
