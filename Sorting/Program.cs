@@ -18,7 +18,7 @@ namespace Sorting
                 Console.WriteLine($"Количество элементов: {i}");
                 int[] array = new int[i]; 
                 for (int j = 0; j < array.Length; j++)
-                    array[j] = random.Next(-99, 99);
+                    array[j] = random.Next(-999, 999);
                 Console.WriteLine($"Оригинальный массив: \n{string.Join(' ', array)}");
                 int[] sortedArray = (int[])array.Clone();
                 Array.Sort(sortedArray);
@@ -42,19 +42,7 @@ namespace Sorting
                     Console.WriteLine(); 
                 }
                 Console.Write("\n\n"); 
-            }
-
-            //long[] masForBubble = new long[] { 8, 9, 10, 7, 6, 5, 4, 0, -100, 200, 45, 1, 1, 6, 66 };
-            //long[] masForInsertion = (long[])masForBubble.Clone();
-            //long[] masForQuick = (long[])masForBubble.Clone();
-            //long[] masForCheck = (long[])masForBubble.Clone();
-            //Array.Sort(masForCheck);
-            //BubleSort bubleSort = new BubleSort();
-            //bubleSort.Sort(masForBubble);
-            //InsertionSort insertionSort = new InsertionSort();
-            //insertionSort.Sort(masForInsertion);
-            //QuickSort quickSort = new QuickSort();
-            //quickSort.Sort(masForQuick);             
+            }            
         }
     }
 }

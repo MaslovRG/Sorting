@@ -4,21 +4,33 @@ using System.Text;
 
 namespace Sorting
 {
+    public enum Direction
+    {
+        Left = 0,
+        Right = 1
+    }
+
+
     public class TreeSort : ISort
     {
         public (int, int) Sort<T>(T[] array) where T : IComparable<T>
         {
-            int compares = 0; 
+            int compares = 0, swaps = 0; 
             var treeNode = new TreeNode<T>(array[0]);
+            int nCompares, nSwaps; 
 
             for (int i = 1; i < array.Length; i++)
-                compares += treeNode.Insert(new TreeNode<T>(array[i]));
+            {
+                (nCompares, nSwaps) = treeNode.Insert(new TreeNode<T>(array[i]), Direction.Left);
+                compares += nCompares;
+                swaps += nSwaps; 
+            }
 
             var sortedArray = treeNode.Transform();
             for (int i = 0; i < array.Length; i++)
                 array[i] = sortedArray[i];               
 
-            return (compares, -1); 
+            return (compares, swaps); 
         }
 
         public string GetSortName()
@@ -40,32 +52,45 @@ namespace Sorting
 
         public TreeNode<T> Right { get; set; }
 
-        public int Insert(TreeNode<T> node)
+        public (int, int) Insert(TreeNode<T> node, Direction direction)
         {
-            int compares = 1; 
+            int compares = 1, swaps = 0;
+            int nCompares, nSwaps; 
             if (node.Data.CompareTo(Data) < 0)
             {
+                if (direction != Direction.Left)
+                {
+                    swaps = 1; 
+                }
                 if (Left == null)
                 {
                     Left = node;
                 }
                 else
                 {
-                    compares += Left.Insert(node);
+                    (nCompares, nSwaps) = Left.Insert(node, Direction.Left);
+                    compares += nCompares;
+                    swaps += nSwaps; 
                 }
             }
             else
             {
+                if (direction != Direction.Right)
+                {
+                    swaps = 1; 
+                }
                 if (Right == null)
                 {
                     Right = node;
                 }
                 else
                 {
-                    compares += Right.Insert(node);
+                    (nCompares, nSwaps) = Right.Insert(node, Direction.Right);
+                    compares += nCompares;
+                    swaps += nSwaps; 
                 }
             }
-            return compares; 
+            return (compares, swaps); 
         }
 
         public T[] Transform(List<T> elements = null)

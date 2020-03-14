@@ -9,20 +9,19 @@ namespace Sorting
         public (int, int) Sort<T>(T[] array) where T : IComparable<T>
         {
             int compares = 0, swaps = 0;
-            for (int i = 1; i < array.Length; i++)
+            for (int i = 0; i < array.Length; i++)
             {
-                T cur = array[i];
-                int j = i;
-                compares++; 
-                while (j > 0 && cur.CompareTo(array[j - 1]) < 0)
+                var minIndex = i; 
+                for (int j = i + 1; j < array.Length; j++)
                 {
-                    array[j] = array[j - 1];
-                    j--;
-                    compares++;
-                    swaps++; 
+                    compares++; 
+                    if (array[j].CompareTo(array[minIndex]) < 0)
+                    {
+                        minIndex = j; 
+                    }
                 }
-                array[j] = cur;
-                swaps++; 
+                if (minIndex != i)
+                    Swapper.Swap(array, i, minIndex, ref swaps);
             }
             return (compares, swaps); 
         }
